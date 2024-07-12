@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光纖線長度計算器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>光纖線長度計算器</h1>
+        <div class="input-group">
+            <label for="start">請輸入起點座標（格式為 X-Y-Z，例如 A-0-1）：</label>
+            <input type="text" id="start" placeholder="A-0-1">
+        </div>
+        <div class="input-group">
+            <label for="end">請輸入終點座標（格式為 X-Y-Z，例如 D-3-10）：</label>
+            <input type="text" id="end" placeholder="D-3-10">
+        </div>
+        <button onclick="calculateLength()">計算</button>
+        <div id="result" class="result">光纖線的長度是: </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
