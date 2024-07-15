@@ -9,8 +9,6 @@ body {
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -25,6 +23,8 @@ h1 {
 }
 
 .input-group {
+display:flex;
+flex-wrap: wrap;
     margin-bottom: 15px;
     text-align: left;
     display: flex;
