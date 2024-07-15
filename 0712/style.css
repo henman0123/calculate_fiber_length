@@ -32,14 +32,13 @@ label {
     margin-bottom: 5px;
 }
 
-textarea {
+input {
     width: calc(100% - 20px);
     padding: 8px;
     font-size: 16px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: none;
 }
 
 button {
