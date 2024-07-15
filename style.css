@@ -23,12 +23,12 @@ h1 {
 }
 
 .input-group {
+    display: flex;
     margin-bottom: 15px;
     text-align: left;
 }
 
 label {
-    display: block;
     margin-bottom: 5px;
 }
 
