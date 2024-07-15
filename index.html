@@ -10,8 +10,12 @@
     <div class="container">
         <h1>光纖線長度計算器</h1>
         <div class="input-group">
-            <label for="coordinates">請輸入起點和終點座標（格式為 X-Y-Z，例如 A-0-1 到 D-3-10，每行一組）：</label>
-            <textarea id="coordinates" placeholder="A-0-1\nD-3-10" rows="5"></textarea>
+            <label for="start">請輸入起點座標（格式為 X-Y-Z，例如 A-0-1，每行一組）：</label>
+            <textarea id="start" placeholder="A-0-1\nB-1-2" rows="5"></textarea>
+        </div>
+        <div class="input-group">
+            <label for="end">請輸入終點座標（格式為 X-Y-Z，例如 D-3-10，每行一組）：</label>
+            <textarea id="end" placeholder="D-3-10\nE-4-5" rows="5"></textarea>
         </div>
         <button onclick="calculateLengths()">計算</button>
         <div id="result" class="result">光纖線的長度是: </div>

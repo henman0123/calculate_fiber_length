@@ -40,22 +40,27 @@ function parseCoordinate(coordinate) {
 }
 
 function calculateLengths() {
-    let coordinatesInput = document.getElementById('coordinates').value;
-    let lines = coordinatesInput.trim().split('\n');
+    let startCoordinatesInput = document.getElementById('start').value.trim();
+    let endCoordinatesInput = document.getElementById('end').value.trim();
+
+    let startLines = startCoordinatesInput.split('\n');
+    let endLines = endCoordinatesInput.split('\n');
+    
+    if (startLines.length !== endLines.length) {
+        document.getElementById('result').innerText = "起點和終點的行數不匹配，請檢查輸入。";
+        return;
+    }
+
     let results = [];
 
-    for (let i = 0; i < lines.length; i += 2) {
-        if (i + 1 < lines.length) {
-            try {
-                let [x1, y1, z1] = parseCoordinate(lines[i]);
-                let [x2, y2, z2] = parseCoordinate(lines[i + 1]);
-                let length = calculateFiberLength(x1, y1, z1, x2, y2, z2);
-                results.push(`從 ${lines[i]} 到 ${lines[i + 1]} 的光纖線長度是: ${length} 公尺`);
-            } catch (error) {
-                results.push(`輸入格式錯誤：${lines[i]} 或 ${lines[i + 1]}`);
-            }
-        } else {
-            results.push(`單獨的輸入：${lines[i]}`);
+    for (let i = 0; i < startLines.length; i++) {
+        try {
+            let [x1, y1, z1] = parseCoordinate(startLines[i]);
+            let [x2, y2, z2] = parseCoordinate(endLines[i]);
+            let length = calculateFiberLength(x1, y1, z1, x2, y2, z2);
+            results.push(`從 ${startLines[i]} 到 ${endLines[i]} 的光纖線長度是: ${length} 公尺`);
+        } catch (error) {
+            results.push(`輸入格式錯誤：${startLines[i]} 或 ${endLines[i]}`);
         }
     }
 
