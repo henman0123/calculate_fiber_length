@@ -23,12 +23,8 @@ h1 {
 }
 
 .input-group {
-display:flex;
-flex-wrap: wrap;
     margin-bottom: 15px;
     text-align: left;
-    display: flex;
-    flex-direction: column; /* 使用 flex-direction: column; 確保 textarea 在 label 下方 */
 }
 
 label {
