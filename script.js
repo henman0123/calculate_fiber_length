@@ -48,6 +48,7 @@ function calculateLengths() {
     
     if (startLines.length !== endLines.length) {
         document.getElementById('result').innerText = "起點和終點的行數不匹配，請檢查輸入。";
+        document.getElementById('result').classList.add('visible');
         return;
     }
 
@@ -65,4 +66,5 @@ function calculateLengths() {
     }
 
     document.getElementById('result').innerHTML = results.join('<br>');
+    document.getElementById('result').classList.add('visible');
 }

@@ -27,15 +27,11 @@ h1 {
     text-align: left;
 }
 
-label {
-    margin-bottom: 5px;
-}
-
 textarea {
     width: calc(100% - 20px);
     padding: 8px;
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-top: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none;
@@ -59,6 +55,11 @@ button:hover {
 .result {
     margin-top: 20px;
     font-size: 18px;
+    display: none;
+}
+
+.result.visible {
+    display: block;
 }
 
 /* RWD 支援 */
