@@ -1,37 +1,70 @@
 function letterToNumber(letter) {
-    // 將字母轉換為數字（A=0, B=1, C=2, ...）
     return letter.toUpperCase().charCodeAt(0) - 'A'.charCodeAt(0);
 }
 
-function zToHeight(z) {
-    // 根據 Z 值計算實際高度（米）
-    return 2.7 - (z - 1) * (2.7 - 0.3) / (10 - 1);
+function zToHeightStandard(z) {
+    return 2.7 - (z - 1) * (2.7 - 0.3) / (10 - 1); //2F機房Z值轉換實際高度值
 }
 
-function calculateFiberLength(x1, y1, z1, x2, y2, z2) {
-    // 將 X 座標的字母轉換為數字
+function zToHeightCustom1(z) {
+    return z * 0.3;  //1F機房Z值轉換實際高度值
+}
+
+function getZHeightFunction(floor) {
+    switch (floor) {
+        case 'custom1':
+            return zToHeightCustom1;
+        case 'standard':
+        default:
+            return zToHeightStandard;
+    }
+}
+
+function calculateFiberLengthStandard(x1, y1, z1, x2, y2, z2) {
     x1 = letterToNumber(x1);
     x2 = letterToNumber(x2);
 
-    // 計算 X 和 Y 座標的距離
     let xyLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
-    // 計算 Z 座標的實際高度
+    let zToHeight = getZHeightFunction('standard');
     let z1Height = zToHeight(z1);
     let z2Height = zToHeight(z2);
 
-    // 計算 Z 座標的總高度
     let zLength = z1Height + z2Height;
 
-    // 計算總長度，並加上補正值 0.6
-    let totalLength = xyLength + zLength + 0.6;
+    let totalLength = xyLength + zLength + 0.6; //補正值 0.6 米
 
-    // 向上取整
     return Math.ceil(totalLength);
 }
 
+function calculateFiberLengthCustom1(x1, y1, z1, x2, y2, z2) {
+    x1 = letterToNumber(x1);
+    x2 = letterToNumber(x2);
+
+    let xyLength = Math.abs(y2 - y1) * 0.6;  //只根據 y1、y2 值差值計算橫向距離
+
+    let zToHeight = getZHeightFunction('custom1');
+    let z1Height = zToHeight(z1);
+    let z2Height = zToHeight(z2);
+
+    let zLength = z1Height + z2Height;
+
+    let totalLength = xyLength + zLength + 0.6; //補正值 0.6 米
+
+    return Math.ceil(totalLength);
+}
+
+function getFiberLengthFunction(floor) {
+    switch (floor) {
+        case 'custom1':
+            return calculateFiberLengthCustom1;
+        case 'standard':
+        default:
+            return calculateFiberLengthStandard;
+    }
+}
+
 function parseCoordinate(coordinate) {
-    // 解析使用者輸入的座標字串，格式為 'X-Y-Z'
     let parts = coordinate.split('-');
     let x = parts[0];
     let y = parseInt(parts[1]);
@@ -42,17 +75,19 @@ function parseCoordinate(coordinate) {
 function calculateLengths() {
     let startCoordinatesInput = document.getElementById('start').value.trim();
     let endCoordinatesInput = document.getElementById('end').value.trim();
+    let floor = document.getElementById('floor').value;
 
     let startLines = startCoordinatesInput.split('\n');
     let endLines = endCoordinatesInput.split('\n');
     
     if (startLines.length !== endLines.length) {
         document.getElementById('result').innerText = "起點和終點的行數不匹配，請檢查輸入。";
-        document.getElementById('result').classList.add('visible');
+        document.getElementById('result').style.display = 'block';
         return;
     }
 
     let results = [];
+    let calculateFiberLength = getFiberLengthFunction(floor);
 
     for (let i = 0; i < startLines.length; i++) {
         try {
@@ -66,5 +101,5 @@ function calculateLengths() {
     }
 
     document.getElementById('result').innerHTML = results.join('<br>');
-    document.getElementById('result').classList.add('visible');
+    document.getElementById('result').style.display = 'block';
 }
