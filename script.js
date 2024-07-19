@@ -3,11 +3,11 @@ function letterToNumber(letter) {
 }
 
 function zToHeightStandard(z) {
-    return 2.7 - (z - 1) * (2.7 - 0.3) / (10 - 1); //2F機房Z值轉換實際高度值
+    return 2.7 - (z - 1) * (2.7 - 0.3) / (10 - 1); //2F 機房 z 值轉換實際高度值
 }
 
 function zToHeightCustom1(z) {
-    return z * 0.3;  //1F機房Z值轉換實際高度值
+    return z * 0.3;  // 1F 機房 z 值轉換實際高度值
 }
 
 function getZHeightFunction(floor) {
@@ -41,7 +41,7 @@ function calculateFiberLengthCustom1(x1, y1, z1, x2, y2, z2) {
     x1 = letterToNumber(x1);
     x2 = letterToNumber(x2);
 
-    let xyLength = Math.abs(y2 - y1) * 0.6;  //只根據 y1、y2 值差值計算橫向距離
+    let xyLength = Math.abs(y1 - y2) * 0.6;  //只根據 y1、y2 值差值計算橫向距離
 
     let zToHeight = getZHeightFunction('custom1');
     let z1Height = zToHeight(z1);
@@ -49,7 +49,7 @@ function calculateFiberLengthCustom1(x1, y1, z1, x2, y2, z2) {
 
     let zLength = z1Height + z2Height;
 
-    let totalLength = xyLength + zLength + 0.6; //補正值 0.6 米
+    let totalLength = xyLength + zLength + 1.6; //補正值 1.6 米(補正值為 0.6 米 + 1 米為含 OPEN RACK 上線槽的空間)
 
     return Math.ceil(totalLength);
 }
@@ -66,9 +66,10 @@ function getFiberLengthFunction(floor) {
 
 function parseCoordinate(coordinate) {
     let parts = coordinate.split('-');
-    let x = parts[0];
-    let y = parseInt(parts[1]);
-    let z = parseInt(parts[2]);
+    let xy = parts[0]; //提取 split 後的首個部分，例如：Y20-5，取出 Y20。
+    let x = xy.charAt(0); //讓 x = split 後的第一部分的首個字元，例如：Y20，取出 Y，
+    let y = xy.slice(1); //刪除 x = split 後的第一個字元並取出，例如：Y20，刪除 Y，取出 20，
+    let z = parts[1]; //提取 split 後的第二部分，例如：Y20-5，取出 5 。
     return [x, y, z];
 }
 
