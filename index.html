@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCKK 光纖線長度計算器</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -17,16 +18,15 @@
             </select>
         </div>
         <div class="input-group">
-            <label for="start">請輸入起點座標（格式為 X-Y-Z，每行一組）：</label>
+            <label for="start">請輸入起點座標（格式為 XY-Z，每行一組）：</label>
             <textarea id="start" placeholder="K1-7&#10;Y11-2" rows="5"></textarea>
         </div>
         <div class="input-group">
-            <label for="end">請輸入終點座標（格式為 X-Y-Z，每行一組）：</label>
+            <label for="end">請輸入終點座標（格式為 XY-Z，每行一組）：</label>
             <textarea id="end" placeholder="L3-10&#10;Y20-5" rows="5"></textarea>
         </div>
         <button onclick="calculateLengths()">計算</button>
         <div id="result" class="result" style="display: none;">光纖線的長度是:</div>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
