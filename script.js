@@ -111,7 +111,7 @@ function calculateLengths() {
             let length = calculateFiberLength(x1, y1, z1, x2, y2, z2); // 計算光纖長度
             let startConnectorType = checkConnectorType(`${x1}${y1}-${z1}`, floor); //檢查起點座標的接頭類型
             let endConnectorType = checkConnectorType(`${x2}${y2}-${z2}`, floor);  //檢查終點座標的接頭類型
-            results.push(`從 ${line.split('.')[0]}(${startConnectorType})到 ${line.split('.')[1]}(${endConnectorType})的光纖線長度是: ${length} 公尺`);
+            results.push(`從 ${line.split('.')[0]}(${startConnectorType}) 到 ${line.split('.')[1]}(${endConnectorType}) 的光纖線長度是: ${length} 公尺`);
         } catch (error) {
             results.push(`輸入格式錯誤：${line}`);
         }
