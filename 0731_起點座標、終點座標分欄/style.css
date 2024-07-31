@@ -14,16 +14,12 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 600px;
+    max-width: 400px;
     text-align: center;
 }
 
 h1 {
     margin-bottom: 20px;
-}
-
-select{
-    padding: 0.2em 0.4em;
 }
 
 .input-group {
@@ -65,7 +61,6 @@ button:hover {
 .result.visible {
     display: block;
 }
-
 
 /* RWD 支援 */
 @media (max-width: 480px) {
