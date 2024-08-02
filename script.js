@@ -49,7 +49,7 @@ function calculateFiberLengthCustom1(x1, y1, z1, x2, y2, z2) {
 
     let zLength = z1Height + z2Height;
 
-    let totalLength = xyLength + zLength + 1.6; //補正值 1.6 米(補正值為 0.6 米 + 1 米為含 OPEN RACK 上線槽的空間)
+    let totalLength = xyLength + zLength + 1.2; //補正值 1.6 米(補正值為 0.6 米 + 1 米為含 OPEN RACK 上線槽的空間 8/3:補正值改為1.2米)
 
     return Math.ceil(totalLength);
 }
@@ -92,7 +92,7 @@ function getFCConnectors(floor) {
 
 function checkConnectorType(coordinate, floor) {
     const fcConnectors = getFCConnectors(floor);
-    return fcConnectors.has(coordinate) ? 'FC' : 'SC';
+    return fcConnectors.has(coordinate.toUpperCase()) ? 'FC' : 'SC';
 }
 
 function calculateLengths() {
@@ -111,7 +111,17 @@ function calculateLengths() {
             let length = calculateFiberLength(x1, y1, z1, x2, y2, z2); // 計算光纖長度
             let startConnectorType = checkConnectorType(`${x1}${y1}-${z1}`, floor); //檢查起點座標的接頭類型
             let endConnectorType = checkConnectorType(`${x2}${y2}-${z2}`, floor);  //檢查終點座標的接頭類型
-            results.push(`從 ${line.split('.')[0]}(${startConnectorType}) 到 ${line.split('.')[1]}(${endConnectorType}) 的光纖線長度是: ${length} 公尺`);
+            let startConnectorTypeFormatted = `${startConnectorType}`; //格式化 startConnectorType
+            let endConnectorTypeFormatted = `${endConnectorType}`; //格式化 endConnectorType
+
+            if (startConnectorType === 'FC') { //如果是 FC，使用 <span style="color: red;"> 裝飾文字
+                startConnectorTypeFormatted = `<span style="color: red;">${startConnectorTypeFormatted}</span>`;
+            }
+
+            if (endConnectorType === 'FC') { //如果是 FC，使用 <span style="color: red;"> 裝飾文字
+                endConnectorTypeFormatted = `<span style="color: red;">${endConnectorTypeFormatted}</span>`;
+            }
+            results.push(`從 ${line.split('.')[0]}(${startConnectorTypeFormatted}) 到 ${line.split('.')[1]}(${endConnectorTypeFormatted}) 的光纖線長度是: ${length} 公尺`);
         } catch (error) {
             results.push(`輸入格式錯誤：${line}`);
         }
