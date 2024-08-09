@@ -8,8 +8,11 @@ body {
     margin: 0;
 }
 
+
+
 .container {
     background-color: #fff;
+    overflow-x: hidden;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -66,6 +69,93 @@ button:hover {
     display: block;
 }
 
+/*側邊欄樣式*/
+input[type="checkbox"]  {
+    position: fixed;
+    right: 20px;
+    top:20px;
+    width: 50px;
+    height: 50px;
+    z-index: 100001;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.icon {
+    position: fixed;
+    right: 20px;
+    top:20px;
+    width: 50px;
+    height: 50px;
+    z-index: 100001;
+    cursor: pointer;
+    background: transparent;
+    pointer-events: none;
+    color: #fff;
+}
+
+
+
+.icon:before{
+    content: '☰';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 50px;
+    font-weight: 700;
+}
+
+input[type="checkbox"]:checked ~ .icon:before{
+    content: '☰';
+    color: #000;
+    transition: 1s;
+}
+
+ul{
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 60px 25px;
+    box-sizing: border-box;
+    width: auto;
+    height: 100vh;
+    background: #000;
+    transition: 0.5s;
+    z-index: 100000;
+    overflow-y: auto;
+}
+
+
+input[type="checkbox"]:checked ~ ul{
+    right: -300px;
+}
+
+ul li{
+    list-style: none;
+}
+
+ul li a {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: right;
+    transition: 0.5s;
+}
+
+ul li a:hover {
+
+    transform: translateX(10px);
+    color: #ff0;
+
+}
 
 /* RWD 支援 */
 @media (max-width: 480px) {
@@ -73,4 +163,37 @@ button:hover {
         height: auto;
         padding: 20px;
     }
+
+    ul {
+        width: 100%;
+        right: 0;
+    }
+
+    input[type="checkbox"]:checked ~ ul {
+        right: -100%;
+    }
+
+    input[type="checkbox"] ~ .icon{
+        top: 0;
+        right: 0;
+        background: #f00;
+        transition: 0.5s;
+
+    }
+
+    input[type="checkbox"] ~ .icon{
+        top: 0;
+        right: 0;
+        background: #f00;
+        transition: 0.5s;
+
+    }
+
+    input[type="checkbox"]:checked ~ .icon{
+        background: #000;
+    }
+
+
 }
+
+
