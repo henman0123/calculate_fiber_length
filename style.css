@@ -152,7 +152,7 @@ ul li a {
 
 ul li a:hover {
 
-    transform: translateX(10px);
+    transform: translateX(-10px);
     color: #ff0;
 
 }
