@@ -119,7 +119,7 @@ ul{
     top: 0;
     right: 0;
     margin: 0;
-    padding: 60px 25px;
+    padding: 60px 30px;
     box-sizing: border-box;
     width: auto;
     height: 100vh;
@@ -144,7 +144,7 @@ ul li a {
     padding: 10px;
     box-sizing: border-box;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     text-align: right;
     transition: 0.5s;
@@ -158,11 +158,12 @@ ul li a:hover {
 }
 
 /* RWD 支援 */
-@media (max-width: 480px) {
+@media (max-width: 720px) {
     body {
-        height: auto;
+        width: auto;
         padding: 20px;
     }
+    
 
     ul {
         width: 100%;
@@ -190,7 +191,7 @@ ul li a:hover {
     }
 
     input[type="checkbox"]:checked ~ .icon{
-        background: #000;
+        background: transparent;
     }
 
 
