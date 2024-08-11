@@ -1,52 +1,38 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCKK 光纖線長度計算工具</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-  </head>
-  <body>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
     <div class="container">
-      <input type="checkbox" name="" checked="checked" />
-      <span class="icon"></span>
-      <h1>TCKK 光纖線長度計算工具</h1>
-      <div class="input-group">
-        <label for="floor">選擇樓層:</label>
-        <select id="floor">
-          <option value="standard">2F</option>
-          <option value="custom1">1F</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <label for="coordinates"
-          >請輸入座標（格式為 起點座標.終點座標，每行一組）：</label
-        >
-        <textarea
-          id="coordinates"
-          placeholder="Y10-5.Y20-3&#10;L7-1.N10-2"
-          rows="5"
-        ></textarea>
-      </div>
-      <button onclick="calculateLengths()">計算</button>
-      <div id="result" class="result" style="display: none"></div>
-      <ul>
-        <li>
-          <a
-            href="https://henman0123.github.io/calculate_fiber_length/"
-            target="_blank"
-            >光纖線長度計算工具</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://henman0123.github.io/export_document/"
-            target="_blank"
-            >標籤製作工具</a
-          >
-        </li>
-      </ul>
+        <input type="checkbox" name="" checked="checked">
+        <span class="icon"></span>
+        <h1>TCKK 光纖線長度計算工具</h1>
+        <div class="input-group">
+            <label for="floor">選擇樓層:</label>
+            <select id="floor">
+                <option value="standard">2F</option>
+                <option value="custom1">1F</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="coordinates">請輸入座標（格式為 起點座標.終點座標，每行一組）：</label>
+            <textarea id="coordinates" placeholder="Y10-5.Y20-3&#10;L7-1.N10-2" rows="5"></textarea>
+        </div>
+        <button onclick="calculateLengths()">計算</button>
+        <div id="result" class="result" style="display: none"></div>
+        <ul>
+            <li>
+                <a href="https://henman0123.github.io/calculate_fiber_length/" target="_blank">光纖線長度計算工具</a>
+            </li>
+            <li>
+                <a href="https://henman0123.github.io/export_document/" target="_blank">標籤製作工具</a>
+            </li>
+        </ul>
     </div>
-  </body>
+</body>
 </html>
