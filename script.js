@@ -80,20 +80,35 @@ function parseCoordinate(coordinate) {
     return [x, y, z];
 }
 
-function getFCConnectors(floor) {
+function getConnectors(floor) {
     switch (floor) {
         case 'custom1':
             return new Set(['C7-1', 'C7-2', 'C7-3', 'C7-4', 'Y11-1', 'Y11-2', 'Y11-3', 'Y11-4', 'Y11-5', 'Y12-1', 'Y12-2', 'Y12-3', 'Y12-4', 'Y12-5', 'Y12-6', 'Y12-7', 'Y12-8', 'Y13-11', 'Z12-1', 'Z12-2', 'Z12-3', 'Z12-4', 'Z12-5', 'Z13-1', 'Z13-2', 'Z13-3']);
         case 'standard':
-        default:
-            return new Set(['B1-1', 'B1-2', 'B1-3', 'B1-4', 'B1-5', 'B1-6', 'B1-7', 'B2-3', 'B2-4', 'B2-5', 'B2-7', 'B2-8', 'B2-9', 'B2-10', 'F13-1', 'K1-2', 'K1-3', 'K1-4', 'K1-7', 'K1-8', 'K2-1', 'K2-2', 'K2-3', 'K2-4', 'K3-1', 'K3-2', 'K3-3', 'K3-4', 'K3-5', 'L1-2', 'L1-3', 'L1-4', 'L1-5', 'L1-6', 'L1-7', 'M1-2', 'M1-3', 'M1-4', 'M1-5', 'M1-6', 'M1-7', 'M1-8', 'M1-10', 'M5-9', 'N1-1', 'N1-2', 'N1-3', 'N1-4', 'N1-5', 'N1-6', 'N1-7', 'N2-1', 'N2-2', 'N2-3', 'N2-4', 'N2-6', 'N2-7', 'N2-8', 'P1-4', 'P1-5', 'P1-6', 'P1-7', 'Q1-1', 'Q1-2', 'Q1-3', 'Q1-4', 'Q3-1']);
+            return {
+            fcConnectors: new Set(['B1-1', 'B1-2', 'B1-3', 'B1-4', 'B1-5', 'B1-6', 'B1-7', 'B2-3', 'B2-4', 'B2-5', 'B2-7', 'B2-8', 'B2-9', 'B2-10', 'F13-1', 'K1-2', 'K1-3', 'K1-4', 'K1-7', 'K1-8', 'K2-1', 'K2-2', 'K2-3', 'K2-4', 'K3-1', 'K3-2', 'K3-3', 'K3-4', 'K3-5', 'L1-2', 'L1-3', 'L1-4', 'L1-5', 'L1-6', 'L1-7', 'M1-2', 'M1-3', 'M1-4', 'M1-5', 'M1-6', 'M1-7', 'M1-8', 'M1-10', 'M5-9', 'N1-1', 'N1-2', 'N1-3', 'N1-4', 'N1-5', 'N1-6', 'N1-7', 'N2-1', 'N2-2', 'N2-3', 'N2-4', 'N2-6', 'N2-7', 'N2-8', 'P1-4', 'P1-5', 'P1-6', 'P1-7', 'Q1-1', 'Q1-2', 'Q1-3', 'Q1-4', 'Q3-1']),
+            lcConnectors: new Set(['R3-2', 'R3-3', 'R3-4', 'Z11-1', 'Z11-2', 'Z11-3', 'Z11-4', 'Z11-5', 'Z11-6', 'Z11-7', 'Z11-8'])
+    };
+    default:
+        return new Set();
     }
 }
 
+//new Set(['3N-1','3N-2','3N-3','3N-4','3N-7','3N-8'])
+
+
+
 function checkConnectorType(coordinate, floor) {
-    const fcConnectors = getFCConnectors(floor);
-    return fcConnectors.has(coordinate.toUpperCase()) ? 'FC' : 'SC';
+    const connectors = getConnectors(floor);
+    if (connectors.fcConnectors && connectors.fcConnectors.has(coordinate.toUpperCase())) {
+        return 'FC';
+    } else if (connectors.lcConnectors && connectors.lcConnectors.has(coordinate.toUpperCase())) {
+        return 'LC';
+    } else {
+        return 'SC';
+    }
 }
+
 
 function calculateLengths() {
     let coordinatesInput = document.getElementById('coordinates').value.trim();
@@ -121,6 +136,15 @@ function calculateLengths() {
             if (endConnectorType === 'FC') { //如果是 FC，使用 <span style="color: red;"> 裝飾文字
                 endConnectorTypeFormatted = `<span style="color: red;">${endConnectorTypeFormatted}</span>`;
             }
+
+            if (startConnectorType === 'LC') { //如果是 LC，使用 <span style="color: blue;"> 裝飾文字
+                startConnectorTypeFormatted = `<span style="color: blue;">${startConnectorTypeFormatted}</span>`;
+            }
+
+            if (endConnectorType === 'LC') { //如果是 LC，使用 <span style="color: blue;"> 裝飾文字
+                endConnectorTypeFormatted = `<span style="color: blue;">${endConnectorTypeFormatted}</span>`;
+            }
+
             results.push(`從 ${line.split('.')[0]}(${startConnectorTypeFormatted}) 到 ${line.split('.')[1]}(${endConnectorTypeFormatted}) 的光纖線長度是: ${length} 公尺`);
         } catch (error) {
             results.push(`輸入格式錯誤：${line}`);
