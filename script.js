@@ -134,6 +134,8 @@ function getConnectors(floor) {
           "K1-2",
           "K1-3",
           "K1-4",
+          "K1-5",
+          "K1-6",
           "K1-7",
           "K1-8",
           "K2-1",
