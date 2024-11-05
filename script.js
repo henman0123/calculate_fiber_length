@@ -26,12 +26,23 @@ function calculateFiberLengthStandard(x1, y1, z1, x2, y2, z2) {
 
   let xyLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
+    // 檢查是否在同一排（x座標相同）
+    const isSameRow = x1 === x2;
+
   let zToHeight = getZHeightFunction("standard");
   let z1Height = zToHeight(z1);
   let z2Height = zToHeight(z2);
 
-  let zLength = z1Height + z2Height;
-
+  let zLength;
+  if (isSameRow) { // 當在同一排時，只計算z高度差的絕對值，不需要兩端都加總
+    zLength = Math.abs(z1Height - z2Height); // 如果z值相同，給予最小高度補正
+    if (z1 === z2) {
+      zLength = 0.3; // 最小高度補正
+    }
+  } else { // 不在同一排時維持原有計算方式
+    zLength = z1Height + z2Height;
+  }
+  
   let totalLength = xyLength + zLength + 0.6; //補正值 0.6 米
   console.log(totalLength);
   return Math.ceil(totalLength);
