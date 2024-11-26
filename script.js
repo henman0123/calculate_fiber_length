@@ -37,7 +37,7 @@ function calculateFiberLengthStandard(x1, y1, z1, x2, y2, z2) {
   if (isSameRow) { // 當在同一排時，只計算 z 高度差的絕對值，不需要兩端都加總
     zLength = Math.abs(z1Height - z2Height); // 如果 z 值相同，給予最小高度補正
     if (z1 === z2) {
-      zLength = 0.9; // 最小高度補正
+      zLength = 0.3; // 最小高度補正
     }
   } else { // 不在同一排時維持原有計算方式
     zLength = z1Height + z2Height;
