@@ -43,7 +43,7 @@ function calculateFiberLengthStandard(x1, y1, z1, x2, y2, z2) {
     zLength = z1Height + z2Height;
   }
   
-  let totalLength = xyLength + zLength + 0.6; //補正值 0.6 米
+  let totalLength = xyLength + zLength + 1.2; //補正值 1.2 米
   console.log(totalLength);
   return Math.ceil(totalLength);
 }
