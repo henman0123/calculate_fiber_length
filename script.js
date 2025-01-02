@@ -60,7 +60,7 @@ function calculateFiberLengthCustom1(x1, y1, z1, x2, y2, z2) {
 
   let zLength = z1Height + z2Height;
 
-  let totalLength = xyLength + zLength + 1.2 + 1.2; //第一個 1.2 米為最長距離應經過 4 個線槽 (0.3*4), 第二個補正值為 1.6 米(補正值為 0.6 米 + 1 米為含 OPEN RACK 上線槽的空間 8/3:補正值改為1.2米)
+  let totalLength = xyLength + zLength + 1.2 + 1.2; //第一個 1.2 米為最長距離應經過 4 個線槽 (0.3*4), 第二個補正值為 1.6 米(補正值為 0.6 米 + 1 米為含 OPEN RACK 上線槽的空間 8/3:補正值改為1.2米) //1.35 備用
   console.log(totalLength);
   return Math.ceil(totalLength);
 }
